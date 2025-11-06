@@ -45,12 +45,13 @@ function App() {
       <h1>GitHub Org Snapshot</h1>
     </header>
     <div className='search'>
-      <input type="text" value={organization} placeholder='Write organization' onChange={(e) => setOrganization(e.target.value)}/>
+      <input type="text" value={organization} placeholder='Enter an organization name' onChange={(e) => setOrganization(e.target.value)}/>
+      <p>sort by</p>
       <select value={sort} onChange={(e) => setSort(e.target.value)}>
         <option value="stars">Stars</option>
         <option value="updated">Updated</option>
       </select>
-      <input type="number" value={limit} min="1" max="20" placeholder='1–20' onChange={(e) => setLimit(e.target.value)}/>
+      <input type="number" value={limit} min="1" max="20" placeholder='limit 1–20' onChange={(e) => setLimit(e.target.value)}/>
       <button onClick={() => loadRepositories()}>Load</button>
     </div>
     <div className='content'>
@@ -67,11 +68,11 @@ function App() {
         {repositories.map(repository =>(
           <li key={repository.name}>
             <a href={repository.html_url}>{repository.name}</a>
-            <p>{repository.stargazers_count}</p>
-            <p>{repository.forks_count}</p>
-            <p>{repository.language}</p>
-            <p>{repository.updated_at}</p>
-            <p>{repository.description}</p>
+            <p>stars: {repository.stargazers_count}</p>
+            <p>forks: {repository.forks_count}</p>
+            <p>language: {repository.language}</p>
+            <p>updatedAt: {new Date(repository.updated_at).toLocaleDateString()}</p>
+            <p>description: {repository.description}</p>
           </li>
         ))}
       </ul>
